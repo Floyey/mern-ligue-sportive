@@ -2,4 +2,29 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  text-align: center;
+}
+
+.logo {
+  height: 20vh;
+}
+
+.nav {
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.footer {
+  height: 24vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.network {
+  margin: 1vh;
+  width: 5vh;
+  height: 5vh;
 }
