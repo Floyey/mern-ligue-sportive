@@ -11,7 +11,6 @@ cd mern-ligue-sportive
 
 Create .env file with connection parameters :
 ```js
-MONGODB_URI=""
 DATABASE_USER=""
 DATABASE_PASSWORD=""
 ```
