@@ -11,6 +11,6 @@ const productSchema = new mongoose.Schema({
   quantity: { type: String, required: true },
 });
 
-const ProductModel = mongoose.model("Produit", productSchema);
+const Product = mongoose.model("Produit", productSchema);
 
-export default ProductModel;
+export default Product;

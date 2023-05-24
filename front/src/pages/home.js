@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div>
       <Header />
-      <h1>Home</h1>
+      <h1>La ligue sportive d'Auvergne</h1>
       <p>Home page content</p>
     </div>
   );
