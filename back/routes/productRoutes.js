@@ -8,13 +8,15 @@ import {
   deleteProduct,
 } from "../controller/productController.js";
 
+import { isAuth, isAdmin, isCustomer } from "../auth/authentification.js";
+
 const productRouter = express.Router();
 
 productRouter.get("/", getAllProducts);
 productRouter.get("/:id", getProductById);
 productRouter.get("/name/:name", getProductByName);
-productRouter.post("/", createProduct);
-productRouter.put("/", updateProduct);
-productRouter.delete("/", deleteProduct);
+productRouter.post("/", isAuth, isAdmin || isCustomer, createProduct);
+productRouter.put("/", isAuth, isAdmin || isCustomer, updateProduct);
+productRouter.delete("/", isAuth, isAdmin || isCustomer, deleteProduct);
 
 export default productRouter;

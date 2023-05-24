@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import { dbConnection } from "./config/database.js";
 import userRouter from "./routes/userRoutes.js";
+import productRouter from "./routes/productRoutes.js";
 
 const app = express();
 app.use(cors());
@@ -20,7 +21,7 @@ mongoose
 app.get("/", (req, res) => {
   res.send("Server is ready");
 });
-
+app.use("/api/product", productRouter);
 app.use("/api/user", userRouter);
 
 const port = process.env.PORT || 5000;

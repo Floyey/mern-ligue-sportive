@@ -18,14 +18,16 @@ export const generateToken = (user) => {
 };
 
 export const isAuth = (req, res, next) => {
-  const authHeader = req.headers.authorization;
-  if (authHeader) {
-    const token = authorization.slice(6, authorization.length);
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+  const authorization = req.headers.authorization;
+  if (authorization) {
+    const token = authorization.slice(7, authorization.length);
+    console.log(token);
+    jwt.verify(token, process.env.JWT_SECRET, (err, decode) => {
+      console.log(err);
       if (err) {
         return res.status(403).send({ message: "Invalid Token" });
       }
-      req.user = user;
+      req.user = decode;
       next();
       return;
     });
@@ -33,6 +35,7 @@ export const isAuth = (req, res, next) => {
     return res.status(401).send({ message: "Token is not found" });
   }
 };
+
 export const isAdmin = (req, res, next) => {
   if (req.user && req.user.role === "admin") {
     next();
