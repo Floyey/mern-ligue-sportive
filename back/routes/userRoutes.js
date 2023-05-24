@@ -5,8 +5,8 @@ const userRouter = express.Router();
 
 userRouter.get('/', getAllUsers);
 userRouter.get('/:id', getUserById);
-userRouter.get('/mail/:mail', getUserByMail);
-userRouter.post('/', createUser);
+userRouter.get('/signin/:mail', getUserByMail);
+userRouter.post('/register', createUser);
 userRouter.put('/', updateUser);
 userRouter.delete('/', deleteUser);
 
