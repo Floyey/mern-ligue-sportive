@@ -1,21 +1,14 @@
 import express from "express";
-import {
-  getAllUsers,
-  getUserById,
-  getUserByMail,
-  createUser,
-  updateUser,
-  deleteUser,
-} from "../controller/userController.js";
-import { isAuth, isAdmin, isCustomer } from "../auth/authentification.js";
+import User from "../controller/userController.js";
+import { isAuth, isAdmin } from "../auth/authentification.js";
 
 const userRouter = express.Router();
 
-userRouter.get("/", isAuth, isAdmin, getAllUsers);
-userRouter.get("/:id", isAuth, isAdmin, getUserById);
-userRouter.post("/signin/:mail", getUserByMail);
-userRouter.post("/register", createUser);
-userRouter.put("/", isAuth, updateUser);
-userRouter.delete("/", isAuth, isAdmin, deleteUser);
+userRouter.get("/", isAuth, isAdmin, User.getAllUsers);
+userRouter.get("/:id", isAuth, isAdmin, User.getUserById);
+userRouter.post("/signin/:mail", User.getUserByMail);
+userRouter.post("/register", User.createUser);
+userRouter.put("/", isAuth, User.updateUser);
+userRouter.delete("/", isAuth, isAdmin, User.deleteUser);
 
 export default userRouter;
