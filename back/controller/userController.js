@@ -10,8 +10,8 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
-export const getUsersByMail = async (req, res) => {
-  const { mail } = req.query;
+export const getUserByMail = async (req, res) => {
+  const { mail } = req.params;
 
   try {
     const users = await User.find({ mail: { $regex: mail, $options: 'i' } });
