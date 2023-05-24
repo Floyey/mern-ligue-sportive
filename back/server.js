@@ -1,8 +1,7 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import { dbConnection } from './config/database';
-import Router from './routes/routes.js';
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import { dbConnection } from "./config/database.js";
 
 const app = express();
 app.use(cors());
@@ -17,9 +16,8 @@ mongoose
     console.log(err.message);
   });
 
-app.use('/api', Router);
-app.get('/', (req, res) => {
-  res.send('Server is ready');
+app.get("/", (req, res) => {
+  res.send("Server is ready");
 });
 
 const port = process.env.PORT || 5000;
