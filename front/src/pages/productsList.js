@@ -1,35 +1,37 @@
 import React, { useEffect, useState } from "react";
-import Footer from "../components/footer";
-import Header from "../components/header";
+import "../styles/detail.css";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import ProductCard from "../components/ProductCard";
+import "../styles/list.css";
 
 export default function Produits() {
   const [backendData, setBackendData] = useState([{}]);
 
   useEffect(() => {
     const list = async () => {
-      const response = await fetch("http://localhost:3000/api/product");
+      const response = await axios.get("http://localhost:5000/api/product");
       console.log(response);
+      console.log(response.data);
       setBackendData(response.data);
     };
     list();
   }, []);
 
+  console.log(backendData);
   return (
     <div>
       <h1>Produits</h1>
-      <div>
-        <div className="imgProduct">
-          <img src="https://picsum.photos/200/300" alt="produit" />
-        </div>
-        <div>
-          <div>
-            <p>Produits page content</p>
-          </div>
-          <div>
-            <p>Prix 400€</p>
-            <p>Encore 10 en stock</p>
-          </div>
-        </div>
+      <div className="listProduct">
+        {backendData.map((product, i) => {
+          return (
+            <>
+              <Link to={`/product/${product.id}`}>
+                <ProductCard product={product} key={i} />
+              </Link>
+            </>
+          );
+        })}
       </div>
     </div>
   );

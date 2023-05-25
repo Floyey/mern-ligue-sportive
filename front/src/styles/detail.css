@@ -1,0 +1,51 @@
+.contentProduct {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 98vw;
+  height: 100%;
+  padding: 0 20px;
+}
+
+.imgProduct {
+  display: flex;
+  justify-content: center;
+  width: 40vw;
+  height: 100%;
+  object-fit: cover;
+}
+
+.infoProduct {
+  display: flex;
+  justify-content: space-between;
+  width: 55vw;
+  height: 100%;
+  padding: 0 20px;
+}
+
+.descriptionProduct {
+  width: 25vw;
+  text-align: left;
+}
+
+.orderProduct {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 20vw;
+  height: 100%;
+  padding: 0 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 1vw;
+}
+
+.callToAction {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 10vh;
+  padding: 0 20px;
+}
