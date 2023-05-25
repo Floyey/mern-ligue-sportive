@@ -8,9 +8,7 @@ export default function Header({ test, setTest }) {
     setTest(localStorage.getItem("userInfo"));
   };
 
-  useEffect(() => {
-    console.log(localStorage.getItem("userInfo") !== null);
-  }, [test]);
+  useEffect(() => { }, [test]);
   return (
     <>
       <nav className="nav">

@@ -17,6 +17,6 @@ productRouter.get("/:id", getProductById);
 productRouter.get("/name/:name", getProductByName);
 productRouter.post("/", isAuth, isAdmin || isCustomer, createProduct);
 productRouter.put("/", isAuth, isAdmin || isCustomer, updateProduct);
-productRouter.delete("/", isAuth, isAdmin || isCustomer, deleteProduct);
+productRouter.delete("/:id", isAuth, isAdmin || isCustomer, deleteProduct);
 
 export default productRouter;
