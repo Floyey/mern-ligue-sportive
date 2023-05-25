@@ -7,7 +7,6 @@ export default {
    * Récupération de tous les utilisateurs
    */
   getAllUsers: async (req, res) => {
-    console.log(res);
     try {
       const users = await User.find();
       res.json(users);

@@ -13,13 +13,11 @@ export default function Produits() {
   useEffect(() => {
     const list = async () => {
       const response = await axios.get("http://localhost:5000/api/product");
-      console.log(response);
       setBackendData(response.data);
     };
     list();
   }, []);
 
-  console.log(backendData);
   useEffect(() => {
     const filterProducts = () => {
       const filtered = backendData.filter((data) =>
@@ -35,7 +33,6 @@ export default function Produits() {
     setSearchName(e.target.value);
   };
 
-  console.log(backendData);
   return (
     <div>
       <div className="search-panel">

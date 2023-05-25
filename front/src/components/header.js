@@ -18,7 +18,7 @@ export default function Header({ test, setTest }) {
     }
   }, [test]);
   return (
-    <>
+    <header>
       <nav className="nav">
         <div className="nav__container">
           <Link to="/">
@@ -59,10 +59,13 @@ export default function Header({ test, setTest }) {
                   </li>
                 </>
               )}
+              <li className="nav__item">
+                <Link to="/cart" className="nav__link">Panier</Link>
+              </li>
             </ul>
           </div>
         </div>
       </nav>
-    </>
+    </header>
   );
 }

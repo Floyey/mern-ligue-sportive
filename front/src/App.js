@@ -14,15 +14,14 @@ import Dashboard from "./pages/adminDashboard";
 import NewProduct from "./pages/AddProduct";
 import Profile from "./pages/profile";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Cart from "./pages/cart";
 
 function App() {
   const [test, setTest] = useState(userInfo);
   return (
     <BrowserRouter>
       <ToastContainer position="bottom-center" limit={1} />
-      <header>
-        <Header test={test} setTest={setTest} />
-      </header>
+      <Header test={test} setTest={setTest} />
       <main style={{ padding: 2 }}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -46,6 +45,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </main>
       <Footer />

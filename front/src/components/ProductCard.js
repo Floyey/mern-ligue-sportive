@@ -1,7 +1,6 @@
 import Card from "react-bootstrap/Card";
 
 function ProductCard(product) {
-  console.log(product.product);
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Img

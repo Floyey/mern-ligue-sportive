@@ -65,13 +65,12 @@ export default function Produit() {
       }
     })
       .then(response => {
-        console.log(response);
+        navigate('/products');
       })
       .catch(error => {
         console.error(error);
       });
 
-    navigate('/products');
   }
 
   return (

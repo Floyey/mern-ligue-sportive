@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <div>
+    <footer>
       <div className="footer">
         <img className="logo" src="logo.png" alt="logo" />
         <div>
@@ -29,6 +29,6 @@ export default function Footer() {
         </address>
       </div>
       <p>LigueSportiveAuvergne© 2023 Tous droits réservés ®</p>
-    </div>
+    </footer>
   );
 }

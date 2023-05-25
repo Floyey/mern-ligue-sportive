@@ -21,7 +21,7 @@ export default function NewProduct() {
   const create = async (e) => {
     e.preventDefault();
     try {
-      const data = await axios.post(
+      axios.post(
         `http://localhost:5000/api/product`,
         backendData,
         {
@@ -30,14 +30,12 @@ export default function NewProduct() {
           },
         }
       );
-      console.log(data);
       navigate("/products");
     } catch (error) {
       toast.error(getErrorFromBackend(error));
     }
   };
 
-  console.log(backendData);
   return (
     <div>
       <h1>Ajouter un nouveau produit</h1>

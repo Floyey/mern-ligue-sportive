@@ -5,7 +5,6 @@ export default {
    * Récupération de tous les produits
    */
   getAllProducts: async (req, res) => {
-    console.log(res);
     try {
       const products = await Product.find();
       res.json(products);
