@@ -95,6 +95,31 @@ export default {
   },
 
   /**
+   * Retire la quantité de produit acheté
+   */
+  purchaseProduct: async (req, res) => {
+    const { id, quantity } = req.body;
+
+    try {
+      const product = await Product.findById(id);
+      if (!product) {
+        return res.status(404).json({ error: "Produit non trouvé" });
+      }
+
+      const updatedQuantity = product.quantity - quantity;
+      if (updatedQuantity < 0) {
+        return res.status(400).json({ error: "Quantité insuffisante" });
+      }
+
+      product.quantity = updatedQuantity;
+      await product.save();
+      res.json({ message: "Quantité mise à jour avec succès" });
+    } catch (error) {
+      res.status(500).json({ error: "Internal server error" });
+    }
+  },
+
+  /**
    * Suppression du produit selon son id
    */
   deleteProduct: async (req, res) => {
