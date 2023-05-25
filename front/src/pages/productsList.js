@@ -6,7 +6,9 @@ import ProductCard from "../components/ProductCard";
 import "../styles/list.css";
 
 export default function Produits() {
-  const [backendData, setBackendData] = useState([{}]);
+  const [backendData, setBackendData] = useState([]);
+  const [searchName, setSearchName] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
     const list = async () => {
@@ -18,11 +20,36 @@ export default function Produits() {
   }, []);
 
   console.log(backendData);
+  useEffect(() => {
+    const filterProducts = () => {
+      const filtered = backendData.filter((data) =>
+        data.name.toLowerCase().includes(searchName.toLowerCase())
+      );
+      setFilteredProducts(filtered);
+    };
+
+    filterProducts();
+  }, [searchName, backendData]);
+
+  const handleSearchNameChange = (e) => {
+    setSearchName(e.target.value);
+  };
+
+  console.log(backendData);
   return (
     <div>
+      <div className="search-panel">
+        <img src="loupe.png" alt="search" />
+        <input
+          type="text"
+          placeholder="Rechercher le produit dont vous avez besoin"
+          value={searchName}
+          onChange={handleSearchNameChange}
+        />
+      </div>
       <h1>Produits</h1>
       <div className="listProduct">
-        {backendData.map((product, i) => {
+        {filteredProducts.map((product, i) => {
           return (
             <>
               <Link to={`/product/${product._id}`}>

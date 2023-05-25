@@ -2,8 +2,27 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin: 4vh auto;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.search-panel {
+  display: flex;
+  justify-content: end;
+  align-items: center;
   margin: 0 auto;
   width: 100%;
   max-width: 1200px;
   padding: 0 20px;
+}
+
+.search-panel input {
+  width: 25vw;
+}
+
+.search-panel img {
+  width: 2vw;
+  height: 2vw;
 }
