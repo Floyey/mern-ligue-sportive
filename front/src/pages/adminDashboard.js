@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { userInfo } from "../utils";
 import 'datatables.net-dt/css/jquery.dataTables.css';
 import $ from 'jquery';
@@ -205,6 +205,9 @@ export default function Dashboard() {
       {view === 'products' && (
         <div>
           <button onClick={handleDeleteProducts}>Supprimer</button>
+          <Link to='/newProduct'>
+            <button>Ajouter</button>
+          </Link>
           <table ref={productsTableRef}></table>
         </div>
       )}
