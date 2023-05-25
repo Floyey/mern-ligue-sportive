@@ -1,14 +1,22 @@
 import { Link } from "react-router-dom";
 import "../styles/navbar.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Header({ test, setTest }) {
+  const [role, setRole] = useState();
   const loagout = () => {
     localStorage.removeItem("userInfo");
     setTest(localStorage.getItem("userInfo"));
   };
 
-  useEffect(() => { }, [test]);
+  useEffect(() => {
+    if (typeof test === "object" && test !== null) {
+      setRole(test.data.role);
+    } else if (typeof test !== "object" && test !== null) {
+      const v = JSON.parse(test);
+      setRole(v.data.role);
+    }
+  }, [test]);
   return (
     <>
       <nav className="nav">
@@ -30,11 +38,26 @@ export default function Header({ test, setTest }) {
                   </Link>
                 </li>
               ) : (
-                <li className="nav__item">
-                  <Link to="/" className="nav__link" onClick={loagout}>
-                    Logout
-                  </Link>
-                </li>
+                <>
+                  <li className="nav__item">
+                    <Link to="/profile" className="nav__link">
+                      Profile
+                    </Link>
+                  </li>
+                  {test !== null && role === "admin" && (
+                    <li className="nav__item">
+                      <Link to="/dashboad" className="nav__link">
+                        Dashboard
+                      </Link>
+                    </li>
+                  )}
+
+                  <li className="nav__item">
+                    <Link to="/" className="nav__link" onClick={loagout}>
+                      Logout
+                    </Link>
+                  </li>
+                </>
               )}
             </ul>
           </div>

@@ -11,6 +11,8 @@ import Footer from "./components/footer";
 import Header from "./components/header";
 import Login from "./pages/login_signup";
 import Dashboard from "./pages/adminDashboard";
+import Profile from "./pages/profile";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const [test, setTest] = useState(userInfo);
@@ -26,7 +28,22 @@ function App() {
           <Route path="/login" element={<Login setTest={setTest} />} />
           <Route path="/products" element={<Produits />} />
           <Route path="/product/:id" element={<Produit />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </main>
       <Footer />
