@@ -9,6 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Connexion à la bdd
 mongoose
   .connect(dbConnection.url, dbConnection.options)
   .then(() => {
@@ -18,12 +19,14 @@ mongoose
     console.log(err.message);
   });
 
+// Initialisation des routes
 app.get("/", (req, res) => {
   res.send("Server is ready");
 });
 app.use("/api/product", productRouter);
 app.use("/api/user", userRouter);
 
+// Lancement du server
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Serve at http://localhost:${port}/api`);

@@ -15,6 +15,7 @@ export default function Dashboard() {
   const productsTableRef = useRef(null);
   const token = userInfo.data.token;
 
+  // Récupération des données
   useEffect(() => {
     axios.get('http://localhost:5000/api/user', {
       headers: {
@@ -37,6 +38,7 @@ export default function Dashboard() {
       });
   }, [token]);
 
+  // Initialisation des tableaux avec DataTable
   useEffect(() => {
     const options = {
       language: {
@@ -112,6 +114,7 @@ export default function Dashboard() {
     }
   }, [view, users, products, navigate]);
 
+  // Gestion de la case à coché global au tableau
   useEffect(() => {
     $(usersTableRef.current).on('click', '#user-check-all', function () {
       const isChecked = $(this).prop('checked');
@@ -124,6 +127,9 @@ export default function Dashboard() {
     });
   }, [view, users, products]);
 
+  /**
+   * Fonction de suppression d'un ou plusieurs utilisateurs
+   */
   const handleDeleteUsers = () => {
     const checkedUserCheckboxes = $(usersTableRef.current).find('.user-checkbox:checked');
     const selectedUserIds = [];
@@ -150,6 +156,9 @@ export default function Dashboard() {
     window.location.reload();
   };
 
+  /**
+   * Fonction de suppression d'un ou plusieurs produits
+   */
   const handleDeleteProducts = () => {
     const checkedProductCheckboxes = $(productsTableRef.current).find('.product-checkbox:checked');
     const selectedProductIds = [];
