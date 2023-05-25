@@ -1,54 +1,60 @@
 import { Fragment, useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
 import "../styles/login_signup.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-// import axios from "axios";
+import axios from "axios";
 import { toast } from "react-toastify";
+import { getErrorFromBackend, userInfo } from "./../utils";
 
-function Login() {
+function Login({ setTest }) {
   const navigate = useNavigate();
-  const { search } = useLocation();
-  const redirectUrl = new URLSearchParams(search).get("redirect");
-  const redirect = redirectUrl ? redirectUrl : "/";
-  const [pseudo, setPseudo] = useState("");
-  const [fullname, setFullname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const { search } = useLocation();
+  // const redirectUrl = new URLSearchParams(search).get("redirect");
+  // const redirect = redirectUrl ? redirectUrl : "/";
+
+  const [userdata, setUserdata] = useState([]);
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setUserdata((values) => ({ ...values, [name]: value }));
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    console.log(userdata);
     try {
-      //   const data = await axios.post("/api/users/signin", {
-      //     email,
-      //     password,
-      //   });
-      //   localStorage.setItem("userInfo", JSON.stringify(data));
-      //   navigate(redirect || "/");
+      const data = await axios.post(
+        `http://localhost:5000/api/user/signin/${userdata.mail}`,
+        {
+          password: userdata.password,
+        }
+      );
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      setTest(localStorage.getItem("userInfo"));
+      navigate("/");
     } catch (error) {
-      toast.error(error);
+      toast.error(getErrorFromBackend(error));
     }
   };
 
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      //   const data = await axios.post("/api/users/signup", {
-      //     pseudo,
-      //     fullname,
-      //     email,
-      //     password,
-      //   });
-      //   localStorage.setItem("userInfo", JSON.stringify(data));
-      //   navigate(redirect || "/");
+      const data = await axios.post(
+        `http://localhost:5000/api/user/register`,
+        userdata
+      );
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      navigate("/");
     } catch (error) {
-      toast.error(error);
+      toast.error(getErrorFromBackend(error));
     }
   };
 
   useEffect(() => {
-    // if (userInfo) {
-    //   navigate(redirect);
-    // }
+    if (userInfo) {
+      navigate();
+    }
     const signInButton = document.getElementById("signIn");
     const signUpButton = document.getElementById("signUp");
     const container = document.getElementById("container");
@@ -66,7 +72,7 @@ function Login() {
       signInButton.removeEventListener("click", () => {});
       signUpButton.removeEventListener("click", () => {});
     };
-  }, [navigate, redirect]);
+  }, [navigate, userInfo]);
 
   return (
     <Fragment>
@@ -78,26 +84,37 @@ function Login() {
               <br />
               <input
                 type="text"
-                placeholder="Pseudonyme"
-                onChange={(e) => setPseudo(e.target.value)}
+                placeholder="Name"
+                name="name"
+                onChange={handleChange}
                 required
               />
               <input
                 type="text"
-                placeholder="Prénom et nom"
-                onChange={(e) => setFullname(e.target.value)}
+                placeholder="firstname"
+                name="firstname"
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="number"
+                placeholder="phone_number"
+                name="phone_number"
+                onChange={handleChange}
                 required
               />
               <input
                 type="email"
                 placeholder="Adresse mail"
-                onChange={(e) => setEmail(e.target.value)}
+                name="mail"
+                onChange={handleChange}
                 required
               />
               <input
                 type="password"
-                placeholder="Mot de passe"
-                onChange={(e) => setPassword(e.target.value)}
+                placeholder="password"
+                name="password"
+                onChange={handleChange}
                 required
               />
               <button>S'inscrire</button>
@@ -110,13 +127,15 @@ function Login() {
               <input
                 type="email"
                 placeholder="Adresse mail"
-                onChange={(e) => setEmail(e.target.value)}
+                name="mail"
+                onChange={handleChange}
                 required
               />
               <input
                 type="password"
-                placeholder="Mot de passe"
-                onChange={(e) => setPassword(e.target.value)}
+                placeholder="password"
+                name="password"
+                onChange={handleChange}
                 required
               />
               <Link to="#">Mot de passe oublié ?</Link>
