@@ -46,7 +46,7 @@ export default function Header({ test, setTest }) {
                   </li>
                   {test !== null && role === "admin" && (
                     <li className="nav__item">
-                      <Link to="/dashboad" className="nav__link">
+                      <Link to="/dashboard" className="nav__link">
                         Dashboard
                       </Link>
                     </li>

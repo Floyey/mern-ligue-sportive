@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../styles/detail.css";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
@@ -120,7 +120,7 @@ export default function NewProduct() {
               required
             />
           </Form.Group>
-          <Button variant="primary" type="submit" onC>
+          <Button variant="primary" type="submit">
             Submit
           </Button>
         </Form>
