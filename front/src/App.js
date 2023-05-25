@@ -23,8 +23,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login setTest={setTest} />} />
-          <Route path="/produits" element={<Produits />} />
-          <Route path="/produits/:id" element={<Produit />} />
+          <Route path="/products" element={<Produits />} />
+          <Route path="/product/:id" element={<Produit />} />
         </Routes>
       </main>
       <Footer />

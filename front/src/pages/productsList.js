@@ -12,7 +12,6 @@ export default function Produits() {
     const list = async () => {
       const response = await axios.get("http://localhost:5000/api/product");
       console.log(response);
-      console.log(response.data);
       setBackendData(response.data);
     };
     list();
@@ -26,7 +25,7 @@ export default function Produits() {
         {backendData.map((product, i) => {
           return (
             <>
-              <Link to={`/product/${product.id}`}>
+              <Link to={`/product/${product._id}`}>
                 <ProductCard product={product} key={i} />
               </Link>
             </>

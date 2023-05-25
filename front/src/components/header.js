@@ -21,7 +21,7 @@ export default function Header({ test, setTest }) {
           <div className="nav__menu" id="nav-menu">
             <ul className="nav__list">
               <li className="nav__item">
-                <Link to="/produits" className="nav__link">
+                <Link to="/products" className="nav__link">
                   Les Produits
                 </Link>
               </li>

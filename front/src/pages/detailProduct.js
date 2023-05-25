@@ -21,25 +21,21 @@ export default function Produit() {
 
   return (
     <div>
-      <h1>Produits</h1>
+      <h1>{backendData.name}</h1>
       <div className="contentProduct">
         <div className="imgProduct">
-          <img src="https://picsum.photos/200/300" alt="produit" />
+          <img src={backendData.imgPrésentation} alt={backendData.name} />
         </div>
         <div className="infoProduct">
           <div className="descriptionProduct">
             <p>Produits page content</p>
-            <p>Description</p>
-            <p>
-              Descouvre que la réalité n’est qu’une immense simulation créée par
-              la Matrice, réduisant l’espèce humaine en esclavage. Pour
-              Morpheus, Neo est «?l’élu?», capable de mettre en échec la M
-            </p>
+            <p>Année: {backendData.year}</p>
+            <p>Description: {backendData.description}</p>
           </div>
           <div className="orderProduct">
-            <h2>Prix 400€</h2>
-            <p>Encore 10 en stock</p>
-            <p>A reccupéré à l'espace Joly</p>
+            <h2>Prix {backendData.price}</h2>
+            <p>Encore {backendData.quantity} en stock</p>
+            <p>A reccupérer à l'espace Joly</p>
             <div className="callToAction">
               <button>Ajouter au panier</button>
               <button>Réservé directement</button>
