@@ -7,9 +7,9 @@ import { getErrorFromBackend, userInfo } from "./../utils";
 
 function Login({ setTest }) {
   const navigate = useNavigate();
-  // const { search } = useLocation();
-  // const redirectUrl = new URLSearchParams(search).get("redirect");
-  // const redirect = redirectUrl ? redirectUrl : "/";
+  const { search } = useLocation();
+  const redirectUrl = new URLSearchParams(search).get("redirect");
+  const redirect = redirectUrl ? redirectUrl : "/";
 
   const [userdata, setUserdata] = useState([]);
 
@@ -21,7 +21,6 @@ function Login({ setTest }) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log(userdata);
     try {
       const data = await axios.post(
         `http://localhost:5000/api/user/signin/${userdata.mail}`,
@@ -31,7 +30,7 @@ function Login({ setTest }) {
       );
       localStorage.setItem("userInfo", JSON.stringify(data));
       setTest(localStorage.getItem("userInfo"));
-      navigate("/");
+      navigate(redirect || "/");
     } catch (error) {
       toast.error(getErrorFromBackend(error));
     }
@@ -45,7 +44,7 @@ function Login({ setTest }) {
         userdata
       );
       localStorage.setItem("userInfo", JSON.stringify(data));
-      navigate("/");
+      navigate(redirect || "/");
     } catch (error) {
       toast.error(getErrorFromBackend(error));
     }
@@ -53,7 +52,7 @@ function Login({ setTest }) {
 
   useEffect(() => {
     if (userInfo) {
-      navigate();
+      navigate(redirect);
     }
     const signInButton = document.getElementById("signIn");
     const signUpButton = document.getElementById("signUp");
@@ -72,7 +71,7 @@ function Login({ setTest }) {
       signInButton.removeEventListener("click", () => {});
       signUpButton.removeEventListener("click", () => {});
     };
-  }, [navigate, userInfo]);
+  }, [navigate, redirect]);
 
   return (
     <Fragment>
