@@ -12,6 +12,8 @@ import Header from "./components/header";
 import Login from "./pages/login_signup";
 import Dashboard from "./pages/adminDashboard";
 import NewProduct from "./pages/AddProduct";
+import Profile from "./pages/profile";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const [test, setTest] = useState(userInfo);
@@ -28,7 +30,22 @@ function App() {
           <Route path="/newProduct" element={<NewProduct />} />
           <Route path="/products" element={<Produits />} />
           <Route path="/product/:id" element={<Produit />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </main>
       <Footer />
