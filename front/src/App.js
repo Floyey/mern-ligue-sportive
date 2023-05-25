@@ -40,8 +40,8 @@ function App() {
           <Route
             path="/profile"
             element={
-              <ProtectedRoute>
-                <Profile />
+              <ProtectedRoute user={test}>
+                <Profile setTest={setTest} />
               </ProtectedRoute>
             }
           />

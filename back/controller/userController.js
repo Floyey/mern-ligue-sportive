@@ -41,7 +41,9 @@ export default {
     const { mail } = req.params;
 
     try {
-      const users = await User.findOne({ mail: { $regex: mail, $options: "i" } });
+      const users = await User.findOne({
+        mail: { $regex: mail, $options: "i" },
+      });
       if (!users) {
         return res.status(404).json({ error: "User not found" });
       }
@@ -53,7 +55,7 @@ export default {
           mail: users.mail,
           phone_number: users.phone_number,
           role: users.role,
-          token: generateToken(users)
+          token: generateToken(users),
         });
       }
     } catch (error) {
@@ -71,7 +73,7 @@ export default {
       mail: req.body.mail,
       password: bcrypt.hashSync(req.body.password),
       phone_number: req.body.phone_number,
-      role: req.body.role
+      role: req.body.role,
     });
 
     try {
@@ -90,7 +92,7 @@ export default {
         password: user.password,
         phone_number: user.phone_number,
         role: user.role,
-        token: generateToken(user)
+        token: generateToken(user),
       });
     } catch (error) {
       res.status(500).json({ error: "Internal server error" });
@@ -102,18 +104,30 @@ export default {
    */
   updateUser: async (req, res) => {
     const { id } = req.params;
-    const { name, firstname, phone_number, mail, password, role } = req.body;
 
     try {
-      const updatedUser = await User.findByIdAndUpdate(
-        id,
-        { name, firstname, phone_number, mail, password, role },
-        { new: true }
-      );
+      const user = await User.findById(id);
+      user.name = req.body.name || user.name;
+      user.firstname = req.body.firstname || user.firstname;
+      user.mail = req.body.mail || user.mail;
+      user.password = bcrypt.hashSync(req.body.password) || user.password;
+      user.phone_number = req.body.phone_number || user.phone_number;
+      user.role = req.body.role || user.role;
+
+      const updatedUser = await user.save();
       if (!updatedUser) {
         return res.status(404).json({ error: "User not found" });
       }
-      res.json(updatedUser);
+      res.send({
+        _id: updatedUser._id,
+        name: updatedUser.name,
+        firstname: updatedUser.firstname,
+        mail: updatedUser.mail,
+        password: updatedUser.password,
+        phone_number: updatedUser.phone_number,
+        role: updatedUser.role,
+        token: generateToken(updatedUser),
+      });
     } catch (error) {
       res.status(500).json({ error: "Internal server error" });
     }
@@ -134,5 +148,5 @@ export default {
     } catch (error) {
       res.status(500).json({ error: "Internal server error" });
     }
-  }
+  },
 };

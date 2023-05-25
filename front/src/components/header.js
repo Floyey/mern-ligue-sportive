@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "../styles/navbar.css";
 import { useEffect, useState } from "react";
-
+let v;
 export default function Header({ test, setTest }) {
   const [role, setRole] = useState();
   const loagout = () => {
@@ -13,10 +13,13 @@ export default function Header({ test, setTest }) {
     if (typeof test === "object" && test !== null) {
       setRole(test.data.role);
     } else if (typeof test !== "object" && test !== null) {
-      const v = JSON.parse(test);
+      v = JSON.parse(test);
       setRole(v.data.role);
+    } else if (typeof v === "undefined" || typeof v === []) {
+      setRole("");
     }
   }, [test]);
+
   return (
     <header>
       <nav className="nav">
@@ -31,7 +34,27 @@ export default function Header({ test, setTest }) {
                   Les Produits
                 </Link>
               </li>
-              {!test ? (
+
+              {test !== null && (role === "admin" || role === "customer") && (
+                <li className="nav__item">
+                  <Link to="/profile" className="nav__link">
+                    Profile
+                  </Link>
+                </li>
+              )}
+              {test !== null && role === "admin" && (
+                <li className="nav__item">
+                  <Link to="/dashboard" className="nav__link">
+                    Dashboard
+                  </Link>
+                </li>
+              )}
+              <li className="nav__item">
+                <Link to="/cart" className="nav__link">
+                  Panier
+                </Link>
+              </li>
+              {test === null ? (
                 <li className="nav__item">
                   <Link to="/login" className="nav__link">
                     Login
@@ -40,28 +63,12 @@ export default function Header({ test, setTest }) {
               ) : (
                 <>
                   <li className="nav__item">
-                    <Link to="/profile" className="nav__link">
-                      Profile
-                    </Link>
-                  </li>
-                  {test !== null && role === "admin" && (
-                    <li className="nav__item">
-                      <Link to="/dashboard" className="nav__link">
-                        Dashboard
-                      </Link>
-                    </li>
-                  )}
-
-                  <li className="nav__item">
-                    <Link to="/" className="nav__link" onClick={loagout}>
+                    <button to="/" className="nav__link" onClick={loagout}>
                       Logout
-                    </Link>
+                    </button>
                   </li>
                 </>
               )}
-              <li className="nav__item">
-                <Link to="/cart" className="nav__link">Panier</Link>
-              </li>
             </ul>
           </div>
         </div>
