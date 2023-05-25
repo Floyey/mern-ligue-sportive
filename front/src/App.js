@@ -11,6 +11,7 @@ import Footer from "./components/footer";
 import Header from "./components/header";
 import Login from "./pages/login_signup";
 import Dashboard from "./pages/adminDashboard";
+import NewProduct from "./pages/AddProduct";
 
 function App() {
   const [test, setTest] = useState(userInfo);
@@ -24,6 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login setTest={setTest} />} />
+          <Route path="/newProduct" element={<NewProduct />} />
           <Route path="/products" element={<Produits />} />
           <Route path="/product/:id" element={<Produit />} />
           <Route path="/dashboard" element={<Dashboard />} />
