@@ -38,7 +38,7 @@ export default function Header({ test, setTest }) {
               {test !== null && (role === "admin" || role === "customer") && (
                 <li className="nav__item">
                   <Link to="/profile" className="nav__link">
-                    Profile
+                    Profil
                   </Link>
                 </li>
               )}

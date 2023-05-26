@@ -35,7 +35,7 @@ export default function Profile({ setTest }) {
     phone_number: userInfo.data.phone_number,
     password: "",
   });
-  useEffect(() => {}, [userInfo]);
+  // useEffect(() => {}, [userInfo]);
   const onChange = (e) => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value });
   };
