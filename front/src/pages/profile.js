@@ -205,7 +205,7 @@ export default function Profile({ setTest }) {
 
               <div className="col-12">
                 <MDBBtn type="submit" onClick={update}>
-                  Submit form
+                  Update
                 </MDBBtn>
               </div>
             </MDBValidation>
