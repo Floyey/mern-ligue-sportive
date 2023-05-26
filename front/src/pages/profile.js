@@ -19,23 +19,30 @@ import {
 import Modal from "../components/modal";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { getErrorFromBackend, userInfo } from "../utils";
+import { getErrorFromBackend } from "../utils";
 import { useNavigate } from "react-router-dom";
 
 export default function Profile({ setTest }) {
   const [staticModal, setStaticModal] = useState(false);
   const toggleShow = () => setStaticModal(!staticModal);
   const navigate = useNavigate();
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("userInfo"))
+  );
   // console.log(userInfo.data);
 
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("userInfo")));
+  }, [user]);
+
   const [formValue, setFormValue] = useState({
-    name: userInfo.data.name,
-    firstname: userInfo.data.firstname,
-    mail: userInfo.data.mail,
-    phone_number: userInfo.data.phone_number,
+    name: user.data.name,
+    firstname: user.data.firstname,
+    mail: user.data.mail,
+    phone_number: user.data.phone_number,
     password: "",
   });
-  // useEffect(() => {}, [userInfo]);
+
   const onChange = (e) => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value });
   };
@@ -43,14 +50,14 @@ export default function Profile({ setTest }) {
     if (formValue.mail === "") {
       toast.error(`email is required`);
     } else {
-      const id = userInfo.data._id;
+      const id = user.data._id;
       try {
         const data = await axios.put(
           `http://localhost:5000/api/user/${id}`,
           formValue,
           {
             headers: {
-              Authorization: `Bearer ${userInfo.data.token}`,
+              Authorization: `Bearer ${user.data.token}`,
             },
           }
         );
@@ -87,9 +94,9 @@ export default function Profile({ setTest }) {
                       style={{ width: "80px" }}
                       fluid
                     />
-                    <MDBTypography tag="h5">{userInfo.data.name}</MDBTypography>
+                    <MDBTypography tag="h5">{user.data.name}</MDBTypography>
                     <MDBTypography tag="h5">
-                      {userInfo.data.firstname}
+                      {user.data.firstname}
                     </MDBTypography>
                     <MDBIcon
                       far
@@ -106,13 +113,13 @@ export default function Profile({ setTest }) {
                         <MDBCol size="6" className="mb-3">
                           <MDBTypography tag="h6">Email</MDBTypography>
                           <MDBCardText className="text-muted">
-                            {userInfo.data.mail}
+                            {user.data.mail}
                           </MDBCardText>
                         </MDBCol>
                         <MDBCol size="6" className="mb-3">
                           <MDBTypography tag="h6">Phone</MDBTypography>
                           <MDBCardText className="text-muted">
-                            {userInfo.data.phone_number}
+                            {user.data.phone_number}
                           </MDBCardText>
                         </MDBCol>
                       </MDBRow>

@@ -3,7 +3,7 @@ import "../styles/login_signup.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { getErrorFromBackend, userInfo } from "./../utils";
+import { getErrorFromBackend } from "./../utils";
 
 function Login({ setTest }) {
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ function Login({ setTest }) {
   };
 
   useEffect(() => {
-    if (userInfo) {
+    if (JSON.parse(localStorage.getItem("userInfo"))) {
       navigate(redirect);
     }
     const signInButton = document.getElementById("signIn");
