@@ -64,7 +64,7 @@ export default function Profile({ setTest }) {
         localStorage.setItem("userInfo", JSON.stringify(data));
         setTest(localStorage.getItem("userInfo"));
         toggleShow();
-        navigate("/");
+        navigate("/profile");
       } catch (error) {
         toast.error(getErrorFromBackend(error));
       }
