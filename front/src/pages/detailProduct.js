@@ -22,7 +22,7 @@ export default function Produit() {
   }, [id]);
 
   const handleQuantityChange = (event) => {
-    if (event.target.value === '') {
+    if (event.target.value === "") {
       return;
     }
     const value = parseInt(event.target.value, 10);
@@ -36,7 +36,10 @@ export default function Produit() {
     );
 
     if (existingItemIndex !== -1) {
-      if ((cartItems[existingItemIndex].quantity + quantity) > backendData.quantity) {
+      if (
+        cartItems[existingItemIndex].quantity + quantity >
+        backendData.quantity
+      ) {
         return;
       }
       cartItems[existingItemIndex].quantity += quantity;
@@ -51,7 +54,6 @@ export default function Produit() {
     }
 
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    console.log(localStorage.cartItems);
   };
 
   const instantPurchase = () => {
@@ -59,19 +61,23 @@ export default function Produit() {
       return;
     }
 
-    axios.put('http://localhost:5000/api/product/purchase', { id: backendData._id, quantity: quantity }, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-      .then(response => {
-        navigate('/products');
+    axios
+      .put(
+        "http://localhost:5000/api/product/purchase",
+        { id: backendData._id, quantity: quantity },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        navigate("/products");
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
-
-  }
+  };
 
   return (
     <div>
