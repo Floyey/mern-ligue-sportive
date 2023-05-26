@@ -72,11 +72,11 @@ export default function Dashboard() {
           ],
           createdRow: (row, data) => {
             $(row).on('click', (e) => {
-              if ($(e.target).is('input[type="checkbox"]')) {
+              if ($(e.target).is('input[type=checkbox')) {
                 return;
-              } else {
-                navigate(`/dashboard/user/${data._id}`);
               }
+              let isChecked = $(`input[value=${data._id}]`).prop('checked');
+              $(`input[value=${data._id}]`).prop('checked', !isChecked);
             });
           }
         });
