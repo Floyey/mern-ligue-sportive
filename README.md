@@ -9,10 +9,12 @@ cd mern-ligue-sportive
 
 ## Installation
 
-Create .env file with connection parameters :
+Create .env file with connection parameters and secret key for JWT :
 ```js
 DATABASE_USER=""
 DATABASE_PASSWORD=""
+PORT=""
+JWT_SECRET=""
 ```
 
 ### Back-end
