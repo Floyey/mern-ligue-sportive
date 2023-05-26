@@ -23,7 +23,7 @@ export default function NewProduct() {
 
   const create = async (e) => {
     const name = 'user_id';
-    const userId = userInfo.data._id;
+    const userId = userInfo[0].data._id;
     setBackendData((values) => ({ ...values, [name]: userId }));
     e.preventDefault();
     try {
@@ -35,8 +35,14 @@ export default function NewProduct() {
             Authorization: `Bearer ${token}`,
           },
         }
-      );
-      navigate("/products");
+      )
+        .then(response => {
+          console.log(response);
+          navigate("/products");
+        })
+        .catch(error => {
+          console.error(error);
+        });
     } catch (error) {
       toast.error(getErrorFromBackend(error));
     }
