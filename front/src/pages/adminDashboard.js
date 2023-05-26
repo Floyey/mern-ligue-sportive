@@ -105,7 +105,7 @@ export default function Dashboard() {
               if ($(e.target).is('input[type="checkbox"]')) {
                 return;
               } else {
-                navigate(`/dashboard/product/${data._id}`);
+                navigate(`/editProduct/${data._id}`);
               }
             });
           }

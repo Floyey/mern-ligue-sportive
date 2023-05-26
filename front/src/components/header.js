@@ -35,7 +35,7 @@ export default function Header({ test, setTest }) {
                 </Link>
               </li>
 
-              {test !== null && (role === "admin" || role === "customer") && (
+              {test !== null && (
                 <li className="nav__item">
                   <Link to="/profile" className="nav__link">
                     Profil
@@ -63,9 +63,9 @@ export default function Header({ test, setTest }) {
               ) : (
                 <>
                   <li className="nav__item">
-                    <button to="/" className="nav__link" onClick={loagout}>
+                    <Link to="/" className="nav__link" onClick={loagout}>
                       Logout
-                    </button>
+                    </Link>
                   </li>
                 </>
               )}

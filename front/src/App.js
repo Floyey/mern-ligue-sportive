@@ -12,6 +12,7 @@ import Header from "./components/header";
 import Login from "./pages/login_signup";
 import Dashboard from "./pages/adminDashboard";
 import NewProduct from "./pages/AddProduct";
+import EditProduct from "./pages/editProduct";
 import Profile from "./pages/profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Cart from "./pages/cart";
@@ -26,17 +27,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login setTest={setTest} />} />
-          <Route path="/newProduct" element={<NewProduct />} />
-          <Route path="/products" element={<Produits />} />
-          <Route path="/product/:id" element={<Produit />} />
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute user={test}>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
           <Route
             path="/profile"
             element={
@@ -45,7 +35,27 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/newProduct" element={
+            <ProtectedRoute user={test}>
+              <NewProduct />
+            </ProtectedRoute>
+          } />
+          <Route path="/editProduct/:id" element={
+            <ProtectedRoute user={test}>
+              <EditProduct />
+            </ProtectedRoute>
+          } />
+          <Route path="/products" element={<Produits />} />
+          <Route path="/product/:id" element={<Produit />} />
           <Route path="/cart" element={<Cart />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute user={test}>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </main>
       <Footer />

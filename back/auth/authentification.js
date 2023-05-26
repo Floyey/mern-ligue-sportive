@@ -49,3 +49,11 @@ export const isCustomer = (req, res, next) => {
   }
   return res.status(401).send({ message: "Coach Token is not valid" });
 };
+
+export const isMerchant = (req, res, next) => {
+  if (req.user && req.user.role === "merchant") {
+    next();
+    return;
+  }
+  return res.status(401).send({ message: "Merchant Token is not valid" });
+};

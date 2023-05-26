@@ -1,3 +1,4 @@
+import User from "../models/User.js";
 import Product from "../models/product.js";
 
 export default {
@@ -74,20 +75,31 @@ export default {
    */
   updateProduct: async (req, res) => {
     const { id } = req.params;
-    const { name, imgPrésentation, img, year, description, price, quantity } =
-      req.body;
 
     try {
-      const updateProduct = await Product.findByIdAndUpdate(id, {
-        name,
-        imgPrésentation,
-        img,
-        year,
-        description,
-        price,
-        quantity,
+      const product = await Product.findById(id);
+      product.name = req.body.name || product.name;
+      product.imgPrésentation = req.body.imgPrésentation || product.imgPrésentation;
+      product.img = req.body.img || product.img;
+      product.year = req.body.year || product.year;
+      product.description = req.body.description || product.description;
+      product.price = req.body.price || product.price;
+      product.quantity = req.body.quantity || product.quantity;
+
+      const updatedProduct = await product.save();
+      if (!updatedProduct) {
+        return res.status(404).json({ erro: "Product not found" });
+      }
+      res.send({
+        _id: updatedProduct._id,
+        name: updatedProduct.name,
+        imgPrésentation: updatedProduct.imgPrésentation,
+        img: updatedProduct.img,
+        year: updatedProduct.year,
+        description: updatedProduct.description,
+        price: updatedProduct.price,
+        quantity: updatedProduct.quantity
       });
-      res.json(updateProduct);
     } catch (error) {
       res.status(500).json({ error: "Internal server error" });
     }
