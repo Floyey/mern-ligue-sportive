@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import { userInfo } from "../utils";
 import "../styles/detail.css";
 
 export default function Produit() {
   const { id } = useParams();
   const [backendData, setBackendData] = useState([{}]);
   const [quantity, setQuantity] = useState(1);
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const token = userInfo.data.token;
   const navigate = useNavigate();
 

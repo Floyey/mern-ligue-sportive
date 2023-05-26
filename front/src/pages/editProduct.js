@@ -4,12 +4,13 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { getErrorFromBackend, userInfo } from "./../utils";
+import { getErrorFromBackend } from "./../utils";
 import "../styles/detail.css";
 
 export default function EditProduct() {
   const { id } = useParams();
   const [backendData, setBackendData] = useState([]);
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const token = userInfo.data.token;
   const navigate = useNavigate();
 
@@ -32,15 +33,11 @@ export default function EditProduct() {
   const update = async (e) => {
     e.preventDefault();
     try {
-      axios.put(
-        `http://localhost:5000/api/product/${id}`,
-        backendData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      axios.put(`http://localhost:5000/api/product/${id}`, backendData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       navigate("/products");
     } catch (error) {
       toast.error(getErrorFromBackend(error));
