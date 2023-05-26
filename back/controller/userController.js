@@ -110,7 +110,11 @@ export default {
       user.name = req.body.name || user.name;
       user.firstname = req.body.firstname || user.firstname;
       user.mail = req.body.mail || user.mail;
-      user.password = bcrypt.hashSync(req.body.password) || user.password;
+      if (req.body.password === "") {
+        user.password = user.password;
+      } else {
+        user.password = bcrypt.hashSync(req.body.password);
+      }
       user.phone_number = req.body.phone_number || user.phone_number;
       user.role = req.body.role || user.role;
 
