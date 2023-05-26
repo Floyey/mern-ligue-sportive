@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { userInfo } from "../utils";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [length, setLenght] = useState(0);
   const navigate = useNavigate();
-  const token = userInfo.data.token;
+  const userInfo = useState(
+    JSON.parse(localStorage.getItem("userInfo"))
+  );
+  const token = userInfo[0].data.token;
 
   useEffect(() => {
     const list = async () => {

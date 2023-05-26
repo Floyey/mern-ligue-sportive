@@ -24,6 +24,10 @@ export default function EditProduct() {
     list();
   }, [id]);
 
+  if (backendData.user_id !== userInfo.data._id && userInfo.data.role !== 'admin') {
+    navigate('/products');
+  }
+
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;

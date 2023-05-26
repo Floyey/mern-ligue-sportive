@@ -51,8 +51,7 @@ export default {
    * Création du produit
    */
   createProduct: async (req, res) => {
-    const { name, imgPrésentation, img, year, description, price, quantity } =
-      req.body;
+    const { name, imgPrésentation, img, year, description, price, quantity, user_id } = req.body;
 
     try {
       const newProduct = await Product.create({
@@ -63,6 +62,7 @@ export default {
         description,
         price,
         quantity,
+        user_id
       });
       res.status(201).json(newProduct);
     } catch (error) {
@@ -98,7 +98,8 @@ export default {
         year: updatedProduct.year,
         description: updatedProduct.description,
         price: updatedProduct.price,
-        quantity: updatedProduct.quantity
+        quantity: updatedProduct.quantity,
+        user_id: updatedProduct.user_id
       });
     } catch (error) {
       res.status(500).json({ error: "Internal server error" });

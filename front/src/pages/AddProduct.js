@@ -4,13 +4,16 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { toast } from "react-toastify";
-import { getErrorFromBackend, userInfo } from "./../utils";
+import { getErrorFromBackend } from "./../utils";
 import { useNavigate } from "react-router-dom";
 
 export default function NewProduct() {
-  const navigate = useNavigate();
-  const token = userInfo.data.token;
   const [backendData, setBackendData] = useState([]);
+  const navigate = useNavigate();
+  const userInfo = useState(
+    JSON.parse(localStorage.getItem("userInfo"))
+  );
+  const token = userInfo[0].data.token;
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -19,6 +22,9 @@ export default function NewProduct() {
   };
 
   const create = async (e) => {
+    const name = 'user_id';
+    const userId = userInfo.data._id;
+    setBackendData((values) => ({ ...values, [name]: userId }));
     e.preventDefault();
     try {
       axios.post(
